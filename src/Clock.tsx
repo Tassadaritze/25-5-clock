@@ -6,8 +6,7 @@ type ClockState = {
     breakLength: number,
     timeLeft: number,
     running: boolean,
-    session: boolean,
-    alert: boolean
+    session: boolean
 }
 
 class Clock extends React.Component<Record<string, never>, ClockState> {
@@ -21,8 +20,7 @@ class Clock extends React.Component<Record<string, never>, ClockState> {
             breakLength: 5,
             timeLeft: 1500,
             running: false,
-            session: true,
-            alert: false
+            session: true
         };
         this.timer = 0;
         this.audio = React.createRef<HTMLAudioElement>();
@@ -77,14 +75,12 @@ class Clock extends React.Component<Record<string, never>, ClockState> {
                             if (!this.state.session) {
                                 this.setState({
                                     timeLeft: this.state.sessionLength * 60,
-                                    session: !this.state.session,
-                                    alert: true
+                                    session: !this.state.session
                                 });
                             } else {
                                 this.setState({
                                     timeLeft: this.state.breakLength * 60,
-                                    session: !this.state.session,
-                                    alert: true
+                                    session: !this.state.session
                                 });
                             }
                         }
@@ -98,7 +94,7 @@ class Clock extends React.Component<Record<string, never>, ClockState> {
                     this.audio.current.load();
                 }
                 if (this.timer) window.clearInterval(this.timer);
-                this.setState({ sessionLength: 25, breakLength: 5, timeLeft: 1500, running: false, session: true, alert: false });
+                this.setState({ sessionLength: 25, breakLength: 5, timeLeft: 1500, running: false, session: true });
                 break;
         }
     }
