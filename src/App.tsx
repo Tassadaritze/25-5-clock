@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
 import './App.css';
+import Clock from "./Clock";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(): JSX.Element {
+    useEffect(() => {
+        const script = document.createElement('script');
+
+        script.src = "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js";
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, [])
+
+    useEffect(() => {
+        const script = document.createElement('script');
+
+        script.src = "https://kit.fontawesome.com/9f760185e4.js";
+        script.async = true;
+        script.crossOrigin = "anonymous";
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, [])
+
+    return (
+        <div className="App">
+            <Clock />
+            <header>25 + 5 Clock</header>
+        </div>
+    );
 }
 
 export default App;
